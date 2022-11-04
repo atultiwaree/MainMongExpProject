@@ -5,8 +5,7 @@ module.exports.msgConstants = {
   userRegistered:
     "Vrification mail has been sent to your registered email address.Plese verify to login.",
   userNotRegistered: "Unable to register user, please try again.",
-  forgetPassMsg:
-    "Reset password mail has been sent to your registered email address.",
+  forgetPassMsg: "Reset password mail has been sent to your registered email address.",
   logout: "Logged out successfully.",
   somethingWentWrong: "Something went wrong.",
   emailAlreadyExist: "Email address already exist.",
@@ -37,4 +36,25 @@ module.exports.msgConstants = {
 
   //Check
   enterDifferentEmail: "Kindly check your email or enter other email id.",
+
+  /* Post Snippets */
+
+  //required
+
+  titleRequired: "You must add title for this post.",
+  postIdIsRequired: "Please provide postId.",
+
+  //Constraints
+  numberOfPostImage: "Can't attach more than 5 photos to post.",
+
+  //Success
+  postCreated: "Successfully created your post.",
+
+  //Misc
+  postIsNotPresent: "Invalid post Id or post is not present.",
+  showMyAllPost: "Your all posts.",
+  showMySinglePost: "Showing your particular post",
+  enterOnlyPostId: "To see your post enter only post Id",
+  showOthersSinglePost: "Other users particular post",
+  showOthersAllPost: "Showing you others all post.",
 };

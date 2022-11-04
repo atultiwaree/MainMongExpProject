@@ -1,5 +1,5 @@
 const sendMail = require("../mail/index.js");
-const regModel = require("../models/regModel.js");
+const { regModel } = require("../models/regModel.js");
 const utils = require("../helper/utils");
 const { msgConstants } = require("../helper/msgConstants");
 const mailBody = require("../html/email.body");
