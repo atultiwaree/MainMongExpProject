@@ -13,9 +13,9 @@ app.use(logger("dev"));
 const PORT = process.env.PORT || 3001;
 
 // routes
-const user_routes = require("./routes/user.routes");
+const index_routes = require("./routes/index.routes");
 
-app.use("/user", user_routes);
+app.use("/api/v1", index_routes);
 
 // db connection
 mongoose
