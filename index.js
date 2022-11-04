@@ -19,7 +19,7 @@ app.use("/user", user_routes);
 
 // db connection
 mongoose
-  .connect("mongodb://localhost:27017/userData")
+  .connect("mongodb://0.0.0.0:27017/userData")
   .then(() => console.log("MongoDb : START"));
 
 server.listen(PORT, console.log(`Server @${PORT}`));

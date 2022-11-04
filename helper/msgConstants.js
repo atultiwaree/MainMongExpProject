@@ -32,4 +32,9 @@ module.exports.msgConstants = {
 
   //Success
   passwordChanged: "Successfully changed your password.",
+  updatedYourProfile: "Successfully updated your profile.",
+  deletedYourAccount: "Successffuly deleted your account.",
+
+  //Check
+  enterDifferentEmail: "Kindly check your email or enter other email id.",
 };

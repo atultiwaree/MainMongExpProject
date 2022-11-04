@@ -51,5 +51,10 @@ routes.put(
   upload.single("profile"),
   asyncTryCatchMiddleware(userController.updateAccount)
 );
+routes.delete(
+  "/deleteaccount",
+  verifyToken,
+  asyncTryCatchMiddleware(userController.deleteAccount)
+);
 
 module.exports = routes;

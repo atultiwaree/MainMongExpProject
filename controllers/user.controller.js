@@ -27,7 +27,7 @@ const registerController = async (req, res) => {
       sendMail(
         user.email,
         "Deft Social Account verification",
-        mailBody.vfMail(dbResult._id, "Click to verify")
+        mailBody.vfMail(user._id, "Click to verify")
       );
       return res.json(utils.createSuccessResponse(msgConstants.userRegistered));
     } else
@@ -175,11 +175,16 @@ const updateAccount = async (req, res) => {
       return res.json(
         utils.createErrorResponse(msgConstants.emailAlreadyExist)
       );
-  } else {
-    return res.json("yop");
   }
+
+  await user.save();
+  return res.json(utils.createSuccessResponse(msgConstants.updatedYourProfile));
 };
 
+const deleteAccount = async (req, res) => {
+  await regModel.deleteOne({ _id: req.user._id });
+  return res.json(utils.createSuccessResponse(msgConstants.deletedYourAccount));
+};
 module.exports = {
   registerController,
   verifyController,
@@ -189,5 +194,6 @@ module.exports = {
   changePassword,
   forgetPassword,
   resetPassword,
+  deleteAccount,
   logout,
 };
