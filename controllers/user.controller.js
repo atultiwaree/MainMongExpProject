@@ -8,8 +8,7 @@ const registerController = async (req, res) => {
   let updateObject = Object.assign({});
 
   for (const i of ["email", "password", "name", "age"]) {
-    if (!req.body[i])
-      return res.json({ success: false, msg: `Please Enter ${i}` });
+    if (!req.body[i]) return res.json({ success: false, msg: `Please Enter ${i}` });
     else updateObject[i] = req.body[i];
   }
 
@@ -24,31 +23,18 @@ const registerController = async (req, res) => {
     const user = await regModel(updateObject).save();
 
     if (user) {
-      sendMail(
-        user.email,
-        "Deft Social Account verification",
-        mailBody.vfMail(user._id, "Click to verify")
-      );
+      sendMail(user.email, "Deft Social Account verification", mailBody.vfMail(user._id, "Click to verify"));
       return res.json(utils.createSuccessResponse(msgConstants.userRegistered));
-    } else
-      return res
-        .json(utils.createErrorResponse(msgConstants.userNotRegistered))
-        .status(400);
-  } else
-    return res
-      .json(utils.createErrorResponse(msgConstants.emailAlreadyExist))
-      .status(400);
+    } else return res.json(utils.createErrorResponse(msgConstants.userNotRegistered)).status(400);
+  } else return res.json(utils.createErrorResponse(msgConstants.emailAlreadyExist)).status(400);
 };
 
 const verifyController = async (req, res) => {
-  if (!req.params.id)
-    return res.json({ success: false, msg: "Id not on params" }).status(400);
+  if (!req.params.id) return res.json({ success: false, msg: "Id not on params" }).status(400);
   regModel
     .updateOne({ _id: req.params.id }, { verified: true })
     .then(() => {
-      return res
-        .json(utils.createSuccessResponse(msgConstants.accountVerified))
-        .status(200);
+      return res.json(utils.createSuccessResponse(msgConstants.accountVerified)).status(200);
     })
     .catch((err) => {
       return res.json({ success: false, error: err.message });
@@ -65,8 +51,7 @@ const loginController = async (req, res) => {
     if (!utils.comparePassword(req.body.password, user.password))
       return res.json(utils.createErrorResponse(msgConstants.wrongPassword));
 
-    if (!user.verified)
-      return res.json(utils.createErrorResponse(msgConstants.verify));
+    if (!user.verified) return res.json(utils.createErrorResponse(msgConstants.verify));
     let token = utils.generateToken({
       _id: user._id,
       password: user.password,
@@ -91,8 +76,7 @@ const getUserController = (req, res) => {
 
 const changePassword = async (req, res) => {
   for (const i of ["oldPassword", "newPassword"])
-    if (!req.body[i])
-      return res.json(utils.createErrorResponse(msgConstants.pp + ` ${i}`));
+    if (!req.body[i]) return res.json(utils.createErrorResponse(msgConstants.pp + ` ${i}`));
 
   let user = req.user;
 
@@ -101,13 +85,11 @@ const changePassword = async (req, res) => {
     await user.save();
 
     return res.json(utils.createSuccessResponse(msgConstants.passwordChanged));
-  } else
-    return res.json(utils.createErrorResponse(msgConstants.wrongOldPassword));
+  } else return res.json(utils.createErrorResponse(msgConstants.wrongOldPassword));
 };
 
 const forgetPassword = async (req, res) => {
-  if (!req.body.email)
-    return res.json(utils.createErrorResponse(msgConstants.pp + "email"));
+  if (!req.body.email) return res.json(utils.createErrorResponse(msgConstants.pp + "email"));
 
   const checkUser = await regModel.findOne({ email: req.body.email });
 
@@ -121,10 +103,7 @@ const forgetPassword = async (req, res) => {
       sendMail(
         req.body.email,
         "Change your password",
-        mailBody.fgMail(
-          utils.generateToken({ _id: checkUser._id }),
-          "Click to change"
-        )
+        mailBody.fgMail(utils.generateToken({ _id: checkUser._id }), "Click to change")
       );
     }
     return res.json(utils.createSuccessResponse(msgConstants.forgetPassMsg));
@@ -134,8 +113,7 @@ const forgetPassword = async (req, res) => {
 };
 
 const resetPassword = async (req, res) => {
-  if (!req.body.newpassword)
-    return res.json(utils.createErrorResponse(msgConstants.provideNewPassword));
+  if (!req.body.newpassword) return res.json(utils.createErrorResponse(msgConstants.provideNewPassword));
 
   if (req.user.passwordChangeRequest) {
     await regModel.updateOne(
@@ -162,8 +140,7 @@ const logout = async (req, res) => {
 const updateAccount = async (req, res) => {
   let user = req.user;
 
-  for (let i of ["email", "name", "age"])
-    if (req.body[i]) user[i] = req.body[i];
+  for (let i of ["email", "name", "age"]) if (req.body[i]) user[i] = req.body[i];
   user["profile"] = req.file ? req.file.path : user["profile"];
 
   if (req.body["email"] && req.body["email"].toLowerCase() != user["email"]) {
@@ -171,10 +148,7 @@ const updateAccount = async (req, res) => {
       email: req.body["email"].toLowerCase(),
     });
 
-    if (emailExist)
-      return res.json(
-        utils.createErrorResponse(msgConstants.emailAlreadyExist)
-      );
+    if (emailExist) return res.json(utils.createErrorResponse(msgConstants.emailAlreadyExist));
   }
 
   await user.save();

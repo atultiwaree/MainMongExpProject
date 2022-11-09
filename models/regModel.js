@@ -39,24 +39,6 @@ const regSchema = mongoose.Schema({
   },
 });
 
-const postsSchema = mongoose.Schema({
-  userId: {
-    type: String,
-  },
-  postTitle: {
-    type: String,
-  },
-  postDescription: {
-    type: String,
-    default: null,
-  },
-  postImages: {
-    type: Array,
-    default: null,
-  },
-});
-
 const regModel = mongoose.model("Registration", regSchema);
-const postsModel = mongoose.model("Posts", postsSchema);
 
-module.exports = { regModel, postsModel };
+module.exports = { regModel };

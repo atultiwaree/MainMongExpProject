@@ -2,8 +2,7 @@ module.exports.msgConstants = {
   // user mesages {Sir}
   tokenRequired: "Please enter authorization token.",
   sessionExpired: "Login session has been expired, please login again.",
-  userRegistered:
-    "Vrification mail has been sent to your registered email address.Plese verify to login.",
+  userRegistered: "Vrification mail has been sent to your registered email address.Plese verify to login.",
   userNotRegistered: "Unable to register user, please try again.",
   forgetPassMsg: "Reset password mail has been sent to your registered email address.",
   logout: "Logged out successfully.",
@@ -15,6 +14,7 @@ module.exports.msgConstants = {
   providePassword: "Please provide password.",
   provideNewPassword: "Please provide your new password.",
   provideOldPassword: "Please provide your old password",
+  providePostId: "Please provide post id.",
 
   //Wrong section
   wrongPassword: "Provided password is not correct.",
@@ -33,6 +33,7 @@ module.exports.msgConstants = {
   passwordChanged: "Successfully changed your password.",
   updatedYourProfile: "Successfully updated your profile.",
   deletedYourAccount: "Successffuly deleted your account.",
+  successfullyUpdatedPost: "Post updated successfully",
 
   //Check
   enterDifferentEmail: "Kindly check your email or enter other email id.",
@@ -52,9 +53,24 @@ module.exports.msgConstants = {
 
   //Misc
   postIsNotPresent: "Invalid post Id or post is not present.",
-  showMyAllPost: "Your all posts.",
-  showMySinglePost: "Showing your particular post",
-  enterOnlyPostId: "To see your post enter only post Id",
-  showOthersSinglePost: "Other users particular post",
-  showOthersAllPost: "Showing you others all post.",
+  showingYourAllPosts: "Showing your posts list.",
+  showingOtherUserAllPost: "Showing other users post lists.",
+  postDescription: "Full post details",
+  noPostFound: "Sorry no post associated with this id.",
+  limitExceed: "Only upto 5 images can be added",
+
+  /*
+
+Followers
+
+*/
+
+  followingPersonIdRequired: "You must provide persons ID to follow.",
+  unFollowPersonIdRequired: "To unfollow you must provide persons ID.",
+  followRequestSent: "Successfully sent follow request.",
+  alreadyFollowed: "Already sent follow request",
+  followRequestAccepted: "You accepted follow request",
+  followRequestRejected: "You rejected follow request",
+  unFollowedUser: "You unfollowed user.",
+  badRequest: "Bad request",
 };
